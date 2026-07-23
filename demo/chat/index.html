@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyrBot AI Assistant — Standalone Chat Interface (/demo/chat/)</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-dark: #050b1a;
+            --bg-card: rgba(15, 28, 51, 0.85);
+            --gold-primary: #cda349;
+            --gold-soft: #eecf79;
+            --gold-light: #f5e3b3;
+            --card-border: rgba(255, 255, 255, 0.08);
+            --card-border-gold: rgba(205, 163, 73, 0.35);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(205, 163, 73, 0.08) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(30, 58, 107, 0.25) 0%, transparent 50%);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* HEADER */
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 28px;
+            background: rgba(5, 11, 26, 0.95);
+            border-bottom: 1px solid var(--card-border-gold);
+            backdrop-filter: blur(12px);
+        }
+
+        .bot-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .bot-avatar {
+            width: 42px;
+            height: 42px;
+            background: linear-gradient(135deg, var(--gold-primary) 0%, #9a7627 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 14px rgba(205, 163, 73, 0.4);
+        }
+
+        .bot-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 20px;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .bot-status {
+            font-size: 11px;
+            color: var(--gold-soft);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #22c55e;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold-primary) 0%, #b08732 100%);
+            color: #050b1a;
+            font-weight: 700;
+            font-size: 13px;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-outline {
+            background: rgba(15, 28, 51, 0.6);
+            color: var(--gold-light);
+            border: 1px solid var(--card-border-gold);
+            font-weight: 600;
+            font-size: 13px;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        /* CHAT STREAM CONTAINER */
+        .chat-container {
+            flex: 1;
+            max-width: 960px;
+            width: 100%;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            padding: 24px;
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* MESSAGE BUBBLES */
+        .msg-row {
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .msg-row.user {
+            flex-direction: row-reverse;
+        }
+
+        .msg-avatar {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 15px;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .msg-row.bot .msg-avatar {
+            background: rgba(205, 163, 73, 0.2);
+            border: 1px solid var(--card-border-gold);
+            color: var(--gold-light);
+        }
+
+        .msg-row.user .msg-avatar {
+            background: rgba(59, 130, 246, 0.2);
+            border: 1px solid rgba(59, 130, 246, 0.4);
+            color: #93c5fd;
+        }
+
+        .msg-content {
+            background: var(--bg-card);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 14px 18px;
+            max-width: 75%;
+            font-size: 13.5px;
+            line-height: 1.6;
+            color: var(--text-main);
+        }
+
+        .msg-row.bot .msg-content {
+            border-top-left-radius: 4px;
+            border-color: var(--card-border-gold);
+        }
+
+        .msg-row.user .msg-content {
+            border-top-right-radius: 4px;
+            background: rgba(30, 58, 107, 0.6);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        /* PROMPT CHIPS BAR */
+        .chips-container {
+            display: flex;
+            gap: 8px;
+            padding: 12px 0;
+            overflow-x: auto;
+            margin-bottom: 8px;
+        }
+
+        .chip {
+            background: rgba(15, 28, 51, 0.8);
+            border: 1px solid var(--card-border-gold);
+            color: var(--gold-light);
+            font-size: 12px;
+            padding: 6px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .chip:hover {
+            background: rgba(205, 163, 73, 0.25);
+            color: #fff;
+        }
+
+        /* CHAT INPUT FORM */
+        .chat-input-bar {
+            display: flex;
+            gap: 10px;
+            background: rgba(5, 11, 26, 0.9);
+            border: 1px solid var(--card-border-gold);
+            border-radius: 16px;
+            padding: 8px 12px;
+            align-items: center;
+        }
+
+        .chat-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+            font-size: 14px;
+            padding: 8px;
+        }
+
+        .chat-input::placeholder {
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <div class="chat-header">
+        <div class="bot-brand">
+            <div class="bot-avatar">🤖</div>
+            <div>
+                <div class="bot-title">HyrBot AI Assistant</div>
+                <div class="bot-status"><span class="status-dot"></span> SLM Engine Online • Standalone Demo Mode</div>
+            </div>
+        </div>
+
+        <div style="display: flex; gap: 10px; align-items: center;">
+            <a href="../" class="btn-outline">🚀 Platform Demo Suite</a>
+            <a href="../" class="btn-gold">🏠 Demo Home</a>
+        </div>
+    </div>
+
+    <!-- MAIN CHAT CONTAINER -->
+    <div class="chat-container">
+        
+        <!-- MESSAGES FEED -->
+        <div class="chat-messages" id="chat-stream">
+            <div class="msg-row bot">
+                <div class="msg-avatar">🤖</div>
+                <div class="msg-content">
+                    <b>Hello! I am HyrBot</b>, your AI Career Assistant and Recruiter Copilot.
+                    <br><br>
+                    I can assist you with your <b>Candidate Profile</b>, parse career signals, calculate <b>Role-Fit Scores</b> against target requisitions, or draft executive resume rewrites!
+                    <br><br>
+                    Try selecting one of the quick prompt chips below or type a message.
+                </div>
+            </div>
+        </div>
+
+        <!-- QUICK PROMPT CHIPS BAR -->
+        <div class="chips-container">
+            <button class="chip" onclick="sendChip('Analyze my role fit for Senior Technical Consultant')">💡 Analyze Role Fit for Senior Technical Consultant</button>
+            <button class="chip" onclick="sendChip('Rewrite my resume with Python & PyTorch focus')">📝 Rewrite Resume with PyTorch Focus</button>
+            <button class="chip" onclick="sendChip('Extract top achievements from my background')">🎯 Extract Top Achievements</button>
+            <button class="chip" onclick="sendChip('Check candidate pipeline status for Precisely')">🏢 Check Pipeline Status</button>
+        </div>
+
+        <!-- INPUT FORM -->
+        <form class="chat-input-bar" onsubmit="handleChatSubmit(event)">
+            <input type="text" id="chat-input-text" class="chat-input" placeholder="Type a message or prompt for HyrBot AI..." required>
+            <button type="submit" class="btn-gold" style="padding: 10px 18px;">Send 🚀</button>
+        </form>
+
+    </div>
+
+    <script>
+        async function handleChatSubmit(event) {
+            event.preventDefault();
+            const inputEl = document.getElementById('chat-input-text');
+            const prompt = inputEl.value.trim();
+            if (!prompt) return;
+
+            inputEl.value = '';
+            appendUserMessage(prompt);
+            await queryHyrBotAPI(prompt);
+        }
+
+        function sendChip(text) {
+            appendUserMessage(text);
+            queryHyrBotAPI(text);
+        }
+
+        function appendUserMessage(text) {
+            const stream = document.getElementById('chat-stream');
+            const row = document.createElement('div');
+            row.className = 'msg-row user';
+            row.innerHTML = `
+                <div class="msg-avatar">👤</div>
+                <div class="msg-content">${escapeHTML(text)}</div>
+            `;
+            stream.appendChild(row);
+            stream.scrollTop = stream.scrollHeight;
+        }
+
+        async function queryHyrBotAPI(promptText) {
+            const stream = document.getElementById('chat-stream');
+            const loadingRow = document.createElement('div');
+            loadingRow.className = 'msg-row bot';
+            loadingRow.innerHTML = `
+                <div class="msg-avatar">🤖</div>
+                <div class="msg-content" style="color: var(--gold-soft);"><i>HyrBot is evaluating signal...</i></div>
+            `;
+            stream.appendChild(loadingRow);
+            stream.scrollTop = stream.scrollHeight;
+
+            try {
+                const res = await fetch('/candidate/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ prompt: promptText })
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    stream.removeChild(loadingRow);
+
+                    const botRow = document.createElement('div');
+                    botRow.className = 'msg-row bot';
+                    botRow.innerHTML = `
+                        <div class="msg-avatar">🤖</div>
+                        <div class="msg-content">${data.reply}</div>
+                    `;
+                    stream.appendChild(botRow);
+                    stream.scrollTop = stream.scrollHeight;
+                    return;
+                }
+            } catch (err) {
+                console.warn('Backend chat API offline, rendering local response:', err);
+            }
+
+            stream.removeChild(loadingRow);
+            const fallbackRow = document.createElement('div');
+            fallbackRow.className = 'msg-row bot';
+            fallbackRow.innerHTML = `
+                <div class="msg-avatar">🤖</div>
+                <div class="msg-content">
+                    🤖 <b>HyrBot Agentic Insight:</b> I've parsed your prompt: <i>"${escapeHTML(promptText)}"</i>.
+                    <br><br>
+                    Your career signals align strongly with <b>Senior Technical Consulting</b> and <b>Data Architecture</b> roles. Would you like me to update your Candidate Profile skills and trigger a resume rewrite?
+                </div>
+            `;
+            stream.appendChild(fallbackRow);
+            stream.scrollTop = stream.scrollHeight;
+        }
+
+        function escapeHTML(str) {
+            return str.replace(/[&<>'"]/g, 
+                tag => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;' }[tag] || tag));
+        }
+    </script>
+</body>
+</html>
