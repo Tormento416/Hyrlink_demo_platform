@@ -1,4 +1,0 @@
-AI_resume_chatbot - Change History
-Builtby ade "Tormento416"
-============================================================
-I hope you enjoy using and improving my quick app! This file is just here for you to track your changes. Thats about it.
