@@ -1,4 +1,4 @@
-const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-1.5-flash";
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-3.1-flash-lite";
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
@@ -18,7 +18,7 @@ export default async function handler(req, res) {
 You provide strategic analysis on candidate profiles, role-fit scoring, resume optimizations, and talent acquisition insights.
 Keep your responses helpful, well-structured with markdown, professional, and concise.`;
 
-  const modelsToTry = [GEMINI_MODEL, "gemini-1.5-flash", "gemini-2.0-flash", "gemini-1.5-pro"];
+  const modelsToTry = [GEMINI_MODEL, "gemini-3.1-flash-lite", "gemini-3.5-flash-lite", "gemini-3.1-pro"];
   const uniqueModels = [...new Set(modelsToTry)];
 
   for (const model of uniqueModels) {
