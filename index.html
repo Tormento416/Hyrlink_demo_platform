@@ -627,6 +627,10 @@ Technical Delivery Lead & Senior Consultant | adrian.sousa@example.com
                         Likelihood Summary: <span style="color: #fff;" id="modal-summary">High probability of role fit.</span>
                     </div>
                 </div>
+            <!-- 3 REQUISITIONS ROLE-FIT COMPARISON -->
+            <div style="margin-bottom: 20px; background: rgba(5,11,26,0.6); border: 1px solid var(--card-border); border-radius: 14px; padding: 14px;">
+                <div style="font-size: 11.5px; font-weight: 800; color: var(--gold-primary); text-transform: uppercase; margin-bottom: 10px;">📊 Role-Fit Scores Across 3 Example Job Requisitions</div>
+                <div id="modal-job-comparison" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px;"></div>
             </div>
 
             <!-- STRENGTHS -->
@@ -659,14 +663,216 @@ Technical Delivery Lead & Senior Consultant | adrian.sousa@example.com
     <!-- CLIENT JAVASCRIPT -->
     <script>
         let demoApplicants = [
-            { id: 'cand-001', name: 'Jessica Lin', email: 'jessica.lin@example.com', role: 'Principal AI/ML Data Engineer', yoe: 12, score: 95, verdict: 'Exceptional Fit', signal: 'Ex-Meta Principal AI Engineer, 12 YOE scaling PyTorch & CUDA RAG pipelines', strengths: ['12 Years Scaling High-Throughput AI Data Systems', 'PyTorch, CUDA, Vector DB RAG Architecture'], status: 'new', resume: 'JESSICA LIN - Principal AI/ML Data Engineer\n12 years experience scaling PyTorch AI models.' },
-            { id: 'cand-002', name: 'Adrian Sousa', email: 'adrian.sousa@example.com', role: 'Senior Technical Consultant', yoe: 10, score: 92, verdict: 'Strong Fit', signal: '10 YOE technical delivery, $2.5M–$4M escalation risk reduction across IBM i & cloud', strengths: ['10 Years Enterprise Technical Consulting', 'Proven $2.5M - $4M Outage Risk Reduction'], status: 'new', resume: 'ADRIAN SOUSA - Senior Technical Consultant\n10+ years experience in technical delivery.' },
-            { id: 'cand-003', name: 'Madalyn Wells', email: 'madalyn.wells@example.com', role: 'Technical Project Manager', yoe: 8, score: 88, verdict: 'Strong Fit', signal: '8 YOE agile execution, multi-team release readiness orchestration', strengths: ['8 Years Agile Project Orchestration', 'Multi-Team Release Readiness'], status: 'new', resume: 'MADALYN WELLS - Technical Project Manager' },
-            { id: 'cand-004', name: 'Robert Sterling', email: 'robert.sterling@example.com', role: 'Enterprise Solutions Architect', yoe: 14, score: 82, verdict: 'Good Fit', signal: '14 YOE cloud architecture, pre-sales technical design for Fortune 500 accounts', strengths: ['14 Years Enterprise Solution Architecture', 'Pre-Sales Technical Presentation'], status: 'new', resume: 'ROBERT STERLING - Enterprise Solutions Architect' },
-            { id: 'cand-005', name: 'Marcus Vance', email: 'marcus.vance@example.com', role: 'Senior Technical Consultant', yoe: 11, score: 74, verdict: 'Moderate Fit', signal: '11 YOE Java enterprise system maintenance, legacy database migration', strengths: ['11 Years Java Enterprise Systems'], status: 'new', resume: 'MARCUS VANCE - Senior Backend Engineer' },
-            { id: 'cand-006', name: 'Samantha Taylor', email: 'samantha.taylor@example.com', role: 'Technical Program Manager', yoe: 5, score: 68, verdict: 'Moderate Fit', signal: '5 YOE project coordination, Jira board management', strengths: ['5 Years Sprint Backlog Tracking'], status: 'new', resume: 'SAMANTHA TAYLOR - Technical Program Manager' },
-            { id: 'cand-007', name: 'Derrick Thorne', email: 'derrick.thorne@example.com', role: 'Senior Technical Consultant', yoe: 3, score: 59, verdict: 'Weak Fit', signal: '3 YOE web application development (React/Node.js)', strengths: ['3 Years JavaScript Web Front-End'], status: 'new', resume: 'DERRICK THORNE - Full-Stack Developer' },
-            { id: 'cand-008', name: 'Carlos Mendez', email: 'carlos.mendez@example.com', role: 'Senior Technical Consultant', yoe: 2, score: 45, verdict: 'Weak Fit', signal: '2 YOE IT Helpdesk & Systems Support', strengths: ['2 Years Windows Support'], status: 'new', resume: 'CARLOS MENDEZ - Systems Administrator' }
+            {
+                id: 'cand-001',
+                name: 'Jessica Lin',
+                email: 'jessica.lin@example.com',
+                role: 'Principal AI/ML Data Engineer',
+                yoe: 12,
+                score: 98,
+                verdict: 'Exceptional Fit',
+                signal: 'Ex-Meta Principal AI Engineer, 12 YOE scaling PyTorch & CUDA RAG pipelines',
+                strengths: ['12 Years Scaling High-Throughput AI Data Systems', 'PyTorch, CUDA, Vector DB RAG Architecture', 'TensorRT Model Serving Optimization'],
+                status: 'new',
+                jobScores: { req1: 72, req2: 91, req3: 98 },
+                resume: `JESSICA LIN\nSan Francisco, CA | jessica.lin@example.com | 12 YOE\n\nSUMMARY:\nEx-Meta Principal AI/ML Data Engineer with 12 years of experience designing sub-100ms RAG retrieval pipelines, distributed CUDA tensor clusters, and vector database indexing engines at petabyte scale.\n\nTECHNICAL EXPERTISE:\nPyTorch, CUDA Acceleration, Qdrant/Milvus, Apache Spark, Python, C++, Distributed Tensor Serving.`
+            },
+            {
+                id: 'cand-002',
+                name: 'Adrian Sousa',
+                email: 'adrian.sousa@example.com',
+                role: 'Senior Technical Consultant',
+                yoe: 10,
+                score: 94,
+                verdict: 'Exceptional Fit',
+                signal: '10 YOE technical delivery, $2.5M–$4M escalation risk reduction across IBM i & cloud',
+                strengths: ['10 Years Enterprise Technical Consulting', 'Proven $2.5M - $4M Outage Risk Reduction', 'IBM i & CDC Real-Time Data Replication'],
+                status: 'new',
+                jobScores: { req1: 94, req2: 92, req3: 76 },
+                resume: `ADRIAN SOUSA\nBoston, MA | adrian.sousa@example.com | 10 YOE\n\nSUMMARY:\nTechnical Delivery Lead and Senior Consultant specializing in mission-critical enterprise software implementations, mainframe/IBM i data streaming, and client escalation risk mitigation.\n\nEXPERIENCE:\n- Led $3.5M multi-site data integrity overhaul for Fortune 500 financial clients.\n- Architected real-time Change Data Capture (CDC) pipelines from legacy IBM i to AWS PostgreSQL.`
+            },
+            {
+                id: 'cand-003',
+                name: 'Elena Rostova',
+                email: 'elena.rostova@example.com',
+                role: 'Technical Delivery Lead',
+                yoe: 9,
+                score: 96,
+                verdict: 'Exceptional Fit',
+                signal: '9 YOE AI data architecture, PyTorch RAG pipelines, Spark streaming & team leadership',
+                strengths: ['9 Years AI Data Architecture & Team Leadership', 'PyTorch LLM RAG & Qdrant Vector Retrieval', 'Apache Spark Real-Time Event Pipelines'],
+                status: 'new',
+                jobScores: { req1: 85, req2: 96, req3: 93 },
+                resume: `ELENA ROSTOVA\nBoston, MA | elena.rostova@example.com | 9 YOE\n\nSUMMARY:\nLead AI Data Architect and Cloud Systems Engineer with 9+ years of experience designing real-time streaming architectures, PyTorch LLM/SLM RAG pipelines, and high-throughput data infrastructure supporting 10M+ daily active users.\n\nTECHNICAL SKILLS:\nPyTorch, CUDA, Qdrant, Spark, Kafka, Python, Go, C++, Distributed Systems.`
+            },
+            {
+                id: 'cand-004',
+                name: 'Madalyn Wells',
+                email: 'madalyn.wells@example.com',
+                role: 'Technical Delivery Lead',
+                yoe: 8,
+                score: 88,
+                verdict: 'Strong Fit',
+                signal: '8 YOE agile execution, multi-team release readiness & engineering delivery',
+                strengths: ['8 Years Agile Project Orchestration', 'Multi-Team Release Readiness Governance', 'Cross-Functional Engineering Delivery'],
+                status: 'contact',
+                jobScores: { req1: 68, req2: 88, req3: 60 },
+                resume: `MADALYN WELLS\nNew York, NY | madalyn.wells@example.com | 8 YOE\n\nSUMMARY:\nTechnical Delivery & Release Readiness Manager directing multi-team sprint cadences, CI/CD deployment pipelines, and engineering governance across cloud microservices.`
+            },
+            {
+                id: 'cand-005',
+                name: 'Robert Sterling',
+                email: 'robert.sterling@example.com',
+                role: 'Enterprise Solutions Architect',
+                yoe: 14,
+                score: 88,
+                verdict: 'Strong Fit',
+                signal: '14 YOE cloud architecture, pre-sales technical design for Fortune 500 accounts',
+                strengths: ['14 Years Enterprise Solution Architecture', 'Pre-Sales Technical Presentation', 'Multi-Tenant Security & Cloud Infrastructure'],
+                status: 'potential',
+                jobScores: { req1: 88, req2: 82, req3: 70 },
+                resume: `ROBERT STERLING\nChicago, IL | robert.sterling@example.com | 14 YOE\n\nSUMMARY:\nPrincipal Solutions Architect with 14 years leading enterprise cloud migrations, high-availability microservice design, and executive pre-sales engagements.`
+            },
+            {
+                id: 'cand-006',
+                name: 'Dr. Aris Thorne',
+                email: 'aris.thorne@example.com',
+                role: 'Principal AI/ML Data Engineer',
+                yoe: 11,
+                score: 95,
+                verdict: 'Exceptional Fit',
+                signal: '11 YOE HPC computing, custom CUDA C++ kernels & PyTorch model compilation',
+                strengths: ['Custom CUDA Kernel Development', 'TensorRT Model Optimization', 'High-Performance C++ & Python Systems'],
+                status: 'new',
+                jobScores: { req1: 65, req2: 86, req3: 95 },
+                resume: `DR. ARIS THORNE\nAustin, TX | aris.thorne@example.com | 11 YOE\n\nSUMMARY:\nPh.D. in High-Performance Computing specializing in low-level CUDA kernel optimization, PyTorch compiler extensions, and parallel GPU algorithms.`
+            },
+            {
+                id: 'cand-007',
+                name: 'Marcus Vance',
+                email: 'marcus.vance@example.com',
+                role: 'Senior Technical Consultant',
+                yoe: 11,
+                score: 82,
+                verdict: 'Good Fit',
+                signal: '11 YOE Java enterprise system maintenance, legacy DB migration & CDC pipelines',
+                strengths: ['11 Years Java Enterprise Systems', 'Legacy Database Schema Migration', 'Oracle & SQL Server Performance Tuning'],
+                status: 'new',
+                jobScores: { req1: 82, req2: 74, req3: 52 },
+                resume: `MARCUS VANCE\nAtlanta, GA | marcus.vance@example.com | 11 YOE\n\nSUMMARY:\nSenior Enterprise Backend Engineer specializing in legacy Java monolith refactoring, high-reliability database migration, and batch processing systems.`
+            },
+            {
+                id: 'cand-008',
+                name: 'Priya Sharma',
+                email: 'priya.sharma@example.com',
+                role: 'Technical Delivery Lead',
+                yoe: 9,
+                score: 90,
+                verdict: 'Strong Fit',
+                signal: '9 YOE cloud-native microservices, Kubernetes orchestration & Go backend engineering',
+                strengths: ['9 Years Go & Kubernetes Microservice Design', 'Automated Multi-Cloud CI/CD Pipelines', 'High-Availability Service Mesh'],
+                status: 'contact',
+                jobScores: { req1: 78, req2: 90, req3: 84 },
+                resume: `PRIYA SHARMA\nSeattle, WA | priya.sharma@example.com | 9 YOE\n\nSUMMARY:\nLead DevOps & Cloud Microservices Engineer with expertise in Go, Kubernetes, Istio service mesh, and automated zero-downtime release orchestration.`
+            },
+            {
+                id: 'cand-009',
+                name: 'David O\'Connor',
+                email: 'david.oconnor@example.com',
+                role: 'Senior Technical Consultant',
+                yoe: 15,
+                score: 96,
+                verdict: 'Exceptional Fit',
+                signal: '15 YOE IBM i (AS/400), DB2 RPGLE & Change Data Capture for financial institutions',
+                strengths: ['15 Years IBM i (AS/400) & RPGLE Architecture', 'CDC Mainframe Streaming', 'Financial Enterprise Compliance'],
+                status: 'new',
+                jobScores: { req1: 96, req2: 68, req3: 45 },
+                resume: `DAVID O'CONNOR\nPhiladelphia, PA | david.oconnor@example.com | 15 YOE\n\nSUMMARY:\nPrincipal IBM i Specialist with 15+ years architecting core banking data integration, RPGLE systems, and real-time CDC replication to cloud warehouses.`
+            },
+            {
+                id: 'cand-010',
+                name: 'Liam Gallagher',
+                email: 'liam.gallagher@example.com',
+                role: 'Technical Delivery Lead',
+                yoe: 7,
+                score: 93,
+                verdict: 'Exceptional Fit',
+                signal: '7 YOE Go concurrency, gRPC microservices, REST APIs & AI service wrappers',
+                strengths: ['7 Years High-Performance Go Engineering', 'gRPC & Concurrent Microservice Workflows', 'Gemini API & LLM Service Integration'],
+                status: 'new',
+                jobScores: { req1: 74, req2: 93, req3: 81 },
+                resume: `LIAM GALLAGHER\nDenver, CO | liam.gallagher@example.com | 7 YOE\n\nSUMMARY:\nSenior Go Backend Engineer focusing on high-concurrency microservice architectures, gRPC APIs, and scalable AI inference gateway wrappers.`
+            },
+            {
+                id: 'cand-011',
+                name: 'Nadia Benali',
+                email: 'nadia.benali@example.com',
+                role: 'Principal AI/ML Data Engineer',
+                yoe: 8,
+                score: 92,
+                verdict: 'Strong Fit',
+                signal: '8 YOE Vector DB indexing, semantic search tuning, and PyTorch embedding generation',
+                strengths: ['Qdrant & Milvus Vector Database Tuning', 'PyTorch Embedding Model Fine-Tuning', 'Sub-50ms Vector Search Latency'],
+                status: 'potential',
+                jobScores: { req1: 70, req2: 87, req3: 92 },
+                resume: `NADIA BENALI\nToronto, ON | nadia.benali@example.com | 8 YOE\n\nSUMMARY:\nAI Search & Information Retrieval Specialist with 8 years building vector search engines, embedding indexing strategies, and PyTorch LLM RAG pipelines.`
+            },
+            {
+                id: 'cand-012',
+                name: 'Hannah Zeller',
+                email: 'hannah.zeller@example.com',
+                role: 'Principal AI/ML Data Engineer',
+                yoe: 13,
+                score: 94,
+                verdict: 'Exceptional Fit',
+                signal: '13 YOE Apache Spark distributed clusters, Snowflake/BigQuery AI feature stores',
+                strengths: ['13 Years Big Data & Spark Clustering', 'AI Feature Store Infrastructure', 'Real-Time Event Stream Ingestion'],
+                status: 'new',
+                jobScores: { req1: 84, req2: 89, req3: 94 },
+                resume: `HANNAH ZELLER\nMinneapolis, MN | hannah.zeller@example.com | 13 YOE\n\nSUMMARY:\nPrincipal Data Platform Architect specializing in 100+ node Apache Spark cluster management, AI feature stores, and real-time Kafka event streaming.`
+            },
+            {
+                id: 'cand-013',
+                name: 'Samantha Taylor',
+                email: 'samantha.taylor@example.com',
+                role: 'Technical Project Manager',
+                yoe: 5,
+                score: 68,
+                verdict: 'Moderate Fit',
+                signal: '5 YOE project coordination, Jira backlog management & team standups',
+                strengths: ['5 Years Sprint Backlog Tracking', 'Jira & Confluence Documentation'],
+                status: 'rejected',
+                jobScores: { req1: 58, req2: 68, req3: 42 },
+                resume: `SAMANTHA TAYLOR\nSan Diego, CA | samantha.taylor@example.com | 5 YOE\n\nSUMMARY:\nProject Coordinator with 5 years managing software project schedules, tracking deliverables, and organizing team standups.`
+            },
+            {
+                id: 'cand-014',
+                name: 'Derrick Thorne',
+                email: 'derrick.thorne@example.com',
+                role: 'Full-Stack Developer',
+                yoe: 3,
+                score: 59,
+                verdict: 'Weak Fit',
+                signal: '3 YOE web application development (React.js / Node.js)',
+                strengths: ['3 Years JavaScript Web Front-End', 'HTML/CSS UI Components'],
+                status: 'rejected',
+                jobScores: { req1: 52, req2: 59, req3: 48 },
+                resume: `DERRICK THORNE\nPhoenix, AZ | derrick.thorne@example.com | 3 YOE\n\nSUMMARY:\nJunior-to-Mid Full-Stack Web Developer building React interfaces and simple REST endpoints.`
+            },
+            {
+                id: 'cand-015',
+                name: 'Carlos Mendez',
+                email: 'carlos.mendez@example.com',
+                role: 'IT Support Engineer',
+                yoe: 2,
+                score: 45,
+                verdict: 'Weak Fit',
+                signal: '2 YOE IT Helpdesk & Systems Support',
+                strengths: ['2 Years Windows & Desktop Support', 'Active Directory Account Management'],
+                status: 'rejected',
+                jobScores: { req1: 45, req2: 40, req3: 35 },
+                resume: `CARLOS MENDEZ\nMiami, FL | carlos.mendez@example.com | 2 YOE\n\nSUMMARY:\nIT Support Specialist providing desktop troubleshooting, printer maintenance, and Active Directory user configuration.`
+            }
         ];
 
         let demoJobs = [
@@ -800,6 +1006,22 @@ Technical Delivery Lead & Senior Consultant | adrian.sousa@example.com
             document.getElementById('modal-score').innerText = cand.score;
             document.getElementById('modal-verdict').innerText = cand.verdict;
             document.getElementById('modal-summary').innerText = cand.signal;
+
+            const reqs = [
+                { name: 'Senior Technical Consultant (Precisely)', score: cand.jobScores ? cand.jobScores.req1 : cand.score },
+                { name: 'Technical Delivery Lead (HyrLink)', score: cand.jobScores ? cand.jobScores.req2 : cand.score },
+                { name: 'Principal AI/ML Data Engineer (Precisely)', score: cand.jobScores ? cand.jobScores.req3 : cand.score }
+            ];
+
+            const comparisonEl = document.getElementById('modal-job-comparison');
+            if (comparisonEl) {
+                comparisonEl.innerHTML = reqs.map(r => `
+                    <div style="background: rgba(15,28,51,0.8); border: 1px solid ${r.score >= 85 ? 'rgba(34,197,94,0.4)' : r.score >= 70 ? 'rgba(205,163,73,0.4)' : 'rgba(239,68,68,0.4)'}; border-radius: 10px; padding: 10px;">
+                        <div style="font-size: 11px; color: var(--text-muted); line-height: 1.3; margin-bottom: 4px;">${r.name}</div>
+                        <div style="font-size: 18px; font-weight: 800; color: ${r.score >= 85 ? '#4ade80' : r.score >= 70 ? '#f0d080' : '#f87171'};">${r.score} / 100</div>
+                    </div>
+                `).join('');
+            }
 
             document.getElementById('modal-strengths').innerHTML = (cand.strengths || []).map(s => `<div style="font-size: 12.5px; color: #fff; margin-bottom: 4px;">✓ ${s}</div>`).join('');
             document.getElementById('modal-resume').innerText = cand.resume;
