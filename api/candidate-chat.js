@@ -1,4 +1,4 @@
-const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-1.5-flash";
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
@@ -18,23 +18,37 @@ export default async function handler(req, res) {
 You provide strategic analysis on candidate profiles, role-fit scoring, resume optimizations, and talent acquisition insights.
 Keep your responses helpful, well-structured with markdown, professional, and concise.`;
 
-  try {
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: `${systemPrompt}\n\nUser Query: ${prompt}\n\nHyrBot Reply:` }] }],
-          generationConfig: { temperature: 0.7, maxOutputTokens: 700 }
-        })
+  const modelsToTry = [GEMINI_MODEL, "gemini-1.5-flash", "gemini-2.0-flash", "gemini-1.5-pro"];
+  const uniqueModels = [...new Set(modelsToTry)];
+
+  for (const model of uniqueModels) {
+    try {
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: `${systemPrompt}\n\nUser Query: ${prompt}\n\nHyrBot Reply:` }] }],
+            generationConfig: { temperature: 0.7, maxOutputTokens: 700 }
+          })
+        }
+      );
+      const data = await response.json();
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (reply) {
+        return res.status(200).json({ reply });
       }
-    );
-    const data = await response.json();
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || "HyrBot evaluated your prompt successfully.";
-    res.status(200).json({ reply });
-  } catch (err) {
-    console.error('HyrBot API error:', err);
-    res.status(500).json({ error: 'Internal server error' });
+      if (data?.error) {
+        console.warn(`HyrBot Gemini API model ${model} error:`, data.error);
+      }
+    } catch (err) {
+      console.warn(`HyrBot Gemini API model ${model} fetch failed:`, err);
+    }
   }
+
+  return res.status(200).json({
+    reply: null,
+    message: "HyrBot Gemini API unavailable. Client fallback triggered."
+  });
 }

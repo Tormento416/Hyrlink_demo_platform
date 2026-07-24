@@ -2,3 +2,4 @@
 [SUCCESS] [2026-07-24 08:56:15] Successfully initialized git repository, rebased, and pushed standalone Vercel app changes to https://github.com/Tormento416/Hyrlink_demo_platform.git
 [SUCCESS] [2026-07-24 08:58:16] Replaced all legacy SLM/Gemma references with Google Gemini AI Engine across headers, badges, architecture maps, and API backend prompts, and pushed updates to GitHub.
 [SUCCESS] [2026-07-24 09:02:10] Added 15 differentiated candidate profiles with multi-job Role-Fit comparison breakdown across 3 requisitions, and pushed updates to GitHub.
+[SUCCESS] [2026-07-24 09:03:25] Created fallback demo/index.html redirect page to resolve legacy Vercel root directory setting and pushed to GitHub.

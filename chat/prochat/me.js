@@ -145,8 +145,8 @@ async function analyzeJD() {
 		});
 		if (res.ok) {
 			const data = await res.json();
-			thinkingEl.remove();
-			if (data.reply) {
+			if (data.reply && data.reply !== 'No response generated.') {
+				thinkingEl.remove();
 				appendAssistantMessage(data.reply);
 				setSendDisabled(false);
 				return;
@@ -219,8 +219,8 @@ async function sendMessage() {
 		});
 		if (res.ok) {
 			const data = await res.json();
-			thinkingEl.remove();
-			if (data.reply) {
+			if (data.reply && data.reply !== 'No response generated.') {
+				thinkingEl.remove();
 				appendAssistantMessage(data.reply);
 				conversationHistory.push({ role: 'user', text: message });
 				conversationHistory.push({ role: 'assistant', text: data.reply });

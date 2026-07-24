@@ -2,7 +2,7 @@ const DEFAULT_RESUME_SUMMARY = `
 Lead AI Data Architect and Distributed Systems Specialist with 9+ years of experience designing real-time streaming architectures, PyTorch LLM & Gemini AI RAG pipelines, and high-throughput data infrastructure supporting 10M+ daily active users.
 `;
 
-const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-2.5-flash";
+const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-1.5-flash";
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
@@ -68,23 +68,37 @@ Assistant:
     });
   }
 
-  try {
-    const response = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/${GEMINI_MODEL}:generateContent?key=${apiKey}`,
-      {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: analyzePrompt }] }],
-          generationConfig: { temperature: 0.75, maxOutputTokens: 800 }
-        })
+  const modelsToTry = [GEMINI_MODEL, "gemini-1.5-flash", "gemini-2.0-flash", "gemini-1.5-pro"];
+  const uniqueModels = [...new Set(modelsToTry)];
+
+  for (const model of uniqueModels) {
+    try {
+      const response = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: analyzePrompt }] }],
+            generationConfig: { temperature: 0.75, maxOutputTokens: 800 }
+          })
+        }
+      );
+      const data = await response.json();
+      const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      if (reply) {
+        return res.status(200).json({ reply });
       }
-    );
-    const data = await response.json();
-    const reply = data?.candidates?.[0]?.content?.parts?.[0]?.text || 'Could not analyze the job description.';
-    res.status(200).json({ reply });
-  } catch (err) {
-    console.error('Analyze API error:', err);
-    res.status(500).json({ error: 'Internal server error' });
+      if (data?.error) {
+        console.warn(`Gemini API model ${model} error:`, data.error);
+      }
+    } catch (err) {
+      console.warn(`Gemini API model ${model} fetch failed:`, err);
+    }
   }
+
+  return res.status(200).json({
+    reply: null,
+    message: "Gemini API unavailable. Client fallback triggered."
+  });
 }
