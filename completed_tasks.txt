@@ -5,3 +5,4 @@
 [SUCCESS] [2026-07-24 09:03:25] Created fallback demo/index.html redirect page to resolve legacy Vercel root directory setting and pushed to GitHub.
 [SUCCESS] [2026-07-24 09:07:50] Fixed ProChat Gemini API integration: updated model string to gemini-1.5-flash, added automatic multi-model fallback, and enabled seamless local AI engine fallback.
 [SUCCESS] [2026-07-24 09:12:52] Set Gemini API fallback model list to gemini-3.1-flash-lite, gemini-3.5-flash-lite, and gemini-3.1-pro, and added persistent red demo warning banner to top of all pages.
+[SUCCESS] [2026-07-24 09:18:50] Added markdown section renderer to chat/index.html to format responses into clean headings, bullet lists, bold highlights, and distinct paragraphs.
