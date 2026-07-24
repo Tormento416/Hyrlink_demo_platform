@@ -382,7 +382,7 @@
             <button class="btn-outline active" onclick="switchDemoTab('enterprise')">🏢 Recruiter Portal</button>
             <button class="btn-outline" onclick="switchDemoTab('candidate')">👤 Candidate Workspace</button>
             <button class="btn-outline" onclick="switchDemoTab('jobs')">⚙️ Job Configs</button>
-            <button class="btn-outline" onclick="switchDemoTab('architecture')">⚡ SLM Architecture</button>
+            <button class="btn-outline" onclick="switchDemoTab('architecture')">⚡ Gemini AI Architecture</button>
             <a href="./chat/" class="btn-outline">💬 HyrBot Chat</a>
             <a href="./chat/prochat/" class="btn-gold">🤖 ProChat Suite</a>
         </div>
@@ -396,7 +396,7 @@
             <div>
                 <span class="hero-tag">PASSWORDLESS STANDALONE DEMO SUITE</span>
                 <h1 class="hero-title">Explore the Full HyrLink Platform</h1>
-                <p class="hero-desc">Experience candidate resume intake, SLM-powered role fit scoring, executive recruiter decision workflows, interactive job configuration, and candidate portfolio AI chat without authentication barriers.</p>
+                <p class="hero-desc">Experience candidate resume intake, Gemini AI-powered role fit scoring, executive recruiter decision workflows, interactive job configuration, and candidate portfolio AI chat without authentication barriers.</p>
             </div>
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <a href="./chat/prochat/" class="btn-gold" style="padding: 12px 20px; font-size: 14px; text-align: center;">
@@ -420,7 +420,7 @@
                 ⚙️ Job Configurations Inspector
             </button>
             <button class="tab-btn" id="btn-tab-architecture" onclick="switchDemoTab('architecture')">
-                ⚡ System & SLM Architecture Map
+                ⚡ System & Gemini AI Architecture Map
             </button>
         </div>
 
@@ -542,8 +542,7 @@ Technical Delivery Lead & Senior Consultant | adrian.sousa@example.com
                                 <b>Extracted Technical Signals:</b>
                                 <ul style="padding-left: 20px; margin-top: 6px;">
                                     <li>10+ Years Enterprise Technical Delivery Leadership</li>
-                                    <li>$2.5M – $4M Annual Client Escalation & Outage Risk Mitigation</li>
-                                    <li>High-Performance Go / Python Microservices & SLM RAG Integration</li>
+                                    <li>High-Performance Vercel Serverless & Gemini AI RAG Integration</li>
                                 </ul>
                             </div>
                         </div>
@@ -566,36 +565,36 @@ Technical Delivery Lead & Senior Consultant | adrian.sousa@example.com
             </div>
         </div>
 
-        <!-- LANDSCAPE 4: SYSTEM & SLM ARCHITECTURE MAP -->
+        <!-- LANDSCAPE 4: SYSTEM & GEMINI AI ARCHITECTURE MAP -->
         <div id="view-architecture" class="demo-view" style="display: none;">
             <div class="glass-card">
                 <div class="card-header">
-                    <span>⚡ HyrLink Architecture & Local Gemma SLM Infrastructure</span>
+                    <span>⚡ HyrLink Architecture & Google Gemini AI Infrastructure</span>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
                     <div style="background: rgba(5,11,26,0.8); border: 1px solid var(--card-border-gold); border-radius: 16px; padding: 20px;">
-                        <div style="font-size: 16px; font-weight: 700; color: var(--gold-light); margin-bottom: 8px;">🧠 Fine-Tuned Gemma SLM Engine</div>
-                        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">4-bit NF4 quantized Gemma model trained via QLoRA on NVIDIA RTX 4070 SUPER GPU.</p>
-                        <div class="chip-tag">PyTorch 2.6+cu124</div>
-                        <div class="chip-tag">BitsAndBytes 4-bit</div>
-                        <div class="chip-tag">PEFT LoRA</div>
+                        <div style="font-size: 16px; font-weight: 700; color: var(--gold-light); margin-bottom: 8px;">🧠 Google Gemini AI Engine</div>
+                        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Google Gemini 2.5 Flash API serverless integration with real-time role-fit analysis and candidate Q&A.</p>
+                        <div class="chip-tag">Gemini 2.5 Flash</div>
+                        <div class="chip-tag">Google AI Studio API</div>
+                        <div class="chip-tag">Offline Engine Fallback</div>
                     </div>
 
                     <div style="background: rgba(5,11,26,0.8); border: 1px solid var(--card-border-gold); border-radius: 16px; padding: 20px;">
-                        <div style="font-size: 16px; font-weight: 700; color: var(--gold-light); margin-bottom: 8px;">🌐 Multi-Tenant Go Backend</div>
-                        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">High-throughput Go HTTP server with asynchronous worker queue handling candidate & enterprise endpoints.</p>
-                        <div class="chip-tag">Go 1.22+</div>
+                        <div style="font-size: 16px; font-weight: 700; color: var(--gold-light); margin-bottom: 8px;">🌐 Vercel Serverless Platform</div>
+                        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Zero-config Node.js serverless API functions serving chat, job description evaluation, and portfolio Q&A endpoints.</p>
+                        <div class="chip-tag">Vercel Serverless</div>
+                        <div class="chip-tag">Node.js 18+</div>
                         <div class="chip-tag">REST API</div>
-                        <div class="chip-tag">Worker Queue</div>
                     </div>
 
                     <div style="background: rgba(5,11,26,0.8); border: 1px solid var(--card-border-gold); border-radius: 16px; padding: 20px;">
-                        <div style="font-size: 16px; font-weight: 700; color: var(--gold-light); margin-bottom: 8px;">💾 Supabase Data Layer</div>
-                        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">PostgreSQL database with Row Level Security (RLS) tracking candidates, applications, and job requisitions.</p>
-                        <div class="chip-tag">PostgreSQL</div>
-                        <div class="chip-tag">Supabase RLS</div>
-                        <div class="chip-tag">REST / Realtime</div>
+                        <div style="font-size: 16px; font-weight: 700; color: var(--gold-light); margin-bottom: 8px;">💾 Standalone Data & State Layer</div>
+                        <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 12px;">Self-contained state engine with client-side reactive rendering, multi-criteria filtering, and profile drawers.</p>
+                        <div class="chip-tag">Zero Database Required</div>
+                        <div class="chip-tag">Local Storage State</div>
+                        <div class="chip-tag">Instant Hydration</div>
                     </div>
                 </div>
             </div>
@@ -672,7 +671,7 @@ Technical Delivery Lead & Senior Consultant | adrian.sousa@example.com
 
         let demoJobs = [
             { id: 'req-001', title: 'Senior Technical Consultant', company: 'Precisely', department: 'Enterprise Professional Services', location: 'Remote / Boston, MA', salary: '$140,000 - $175,000', keywords: ['IBM i (AS/400)', 'Mainframe', 'CDC Replication', 'Python', 'SQL'], desc: 'Lead multi-million dollar data integrity and location intelligence integration projects across IBM i, mainframe, and cloud environments.' },
-            { id: 'req-002', title: 'Technical Delivery Lead', company: 'HyrLink Enterprise', department: 'Core Systems Engineering', location: 'Remote / New York, NY', salary: '$160,000 - $195,000', keywords: ['Go', 'Python', 'Microservices', 'RAG SLM Pipelines'], desc: 'Oversee distributed microservice architecture, release readiness pipelines, and candidate intelligence engines.' },
+            { id: 'req-002', title: 'Technical Delivery Lead', company: 'HyrLink Enterprise', department: 'Core Systems Engineering', location: 'Remote / New York, NY', salary: '$160,000 - $195,000', keywords: ['Go', 'Python', 'Microservices', 'Gemini AI RAG Pipelines'], desc: 'Oversee distributed microservice architecture, release readiness pipelines, and candidate intelligence engines.' },
             { id: 'req-003', title: 'Principal AI/ML Data Engineer', company: 'Precisely', department: 'AI Infrastructure & Data R&D', location: 'Boston, MA / Remote', salary: '$180,000 - $225,000', keywords: ['PyTorch', 'Vector DBs', 'CUDA Acceleration', 'Spark'], desc: 'Architect next-generation AI data processing engines and real-time streaming pipelines.' },
             { id: 'req-004', title: 'Enterprise Solutions Architect', company: 'HyrLink Enterprise', department: 'Global Cloud Solutions', location: 'Remote', salary: '$170,000 - $210,000', keywords: ['Cloud Architecture', 'Supabase', 'OAuth/SAML SSO'], desc: 'Drive technical pre-sales, solution architecture validation, and enterprise cloud migrations.' }
         ];
