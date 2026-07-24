@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "rewrites": [
+    { "source": "/api/chat", "destination": "/api/chat.js" },
+    { "source": "/api/analyze", "destination": "/api/analyze.js" },
+    { "source": "/api/candidate-chat", "destination": "/api/candidate-chat.js" },
+    { "source": "/chat/prochat", "destination": "/chat/prochat/index.html" },
+    { "source": "/chat", "destination": "/chat/index.html" }
+  ]
+}

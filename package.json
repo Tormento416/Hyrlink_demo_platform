@@ -1,0 +1,17 @@
+{
+  "name": "hyrlink-standalone-demo",
+  "version": "2.1.0",
+  "description": "HyrLink Standalone Demo Suite - Vercel Ready",
+  "main": "index.html",
+  "type": "module",
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "node -e \"console.log('HyrLink Standalone App running')\""
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
