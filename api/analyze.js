@@ -1,5 +1,5 @@
 const DEFAULT_RESUME_SUMMARY = `
-Lead AI Data Architect and Distributed Systems Specialist with 9+ years of experience designing real-time streaming architectures, PyTorch LLM & Gemini AI RAG pipelines, and high-throughput data infrastructure supporting 10M+ daily active users.
+Lead AI Data Architect and Distributed Systems Specialist with 9+ years of experience designing real-time streaming architectures, PyTorch LLM & Custom SLM RAG pipelines, and high-throughput data infrastructure supporting 10M+ daily active users.
 `;
 
 const GEMINI_MODEL = process.env.GEMINI_MODEL || "gemini-3.1-flash-lite";

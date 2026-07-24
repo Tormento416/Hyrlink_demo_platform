@@ -13,7 +13,7 @@ let candidateProfile = {
 Boston, MA | (617) 555-0192 | elena.rostova@example.com | github.com/elena-rostova
 
 SUMMARY:
-Lead AI Data Architect and Distributed Systems Specialist with 9+ years of experience designing real-time streaming architectures, PyTorch LLM & Gemini AI RAG pipelines, and high-throughput data infrastructure supporting 10M+ daily active users. Expert in Python, C++, Apache Spark, Vector Databases, and cloud microservices.
+Lead AI Data Architect and Distributed Systems Specialist with 9+ years of experience designing real-time streaming architectures, PyTorch LLM & Custom SLM RAG pipelines, and high-throughput data infrastructure supporting 10M+ daily active users. Expert in Python, C++, Apache Spark, Vector Databases, and cloud microservices.
 
 EXPERIENCE:
 Lead AI Data Architect | Enterprise Intelligence Lab (2021 - Present)
@@ -249,7 +249,7 @@ function generateLocalReply(userMsg) {
 	const msg = userMsg.toLowerCase();
 
 	if (msg.includes('pytorch') || msg.includes('rag') || msg.includes('vector') || msg.includes('ai') || msg.includes('llm') || msg.includes('gemini')) {
-		return "Elena has extensive experience architecting PyTorch LLM and Gemini AI RAG pipelines. At Enterprise Intelligence Lab, she built sub-100ms vector search retrieval engines using Qdrant and Milvus, processing over 50 million document embeddings daily. She also optimized model inference with TensorRT and CUDA acceleration, achieving a 45% reduction in latency.";
+		return "Elena has extensive experience architecting PyTorch LLM and Custom SLM RAG pipelines. At Enterprise Intelligence Lab, she built sub-100ms vector search retrieval engines using Qdrant and Milvus, processing over 50 million document embeddings daily. She also optimized model inference with TensorRT and CUDA acceleration, achieving a 45% reduction in latency.";
 	}
 
 	if (msg.includes('spark') || msg.includes('kafka') || msg.includes('streaming') || msg.includes('pipeline') || msg.includes('data')) {

@@ -3,7 +3,7 @@ ELENA ROSTOVA
 Boston, MA | (617) 555-0192 | elena.rostova@example.com | github.com/elena-rostova
 
 SUMMARY:
-Lead AI Data Architect and Distributed Systems Specialist with 9+ years of experience designing real-time streaming architectures, PyTorch LLM & Gemini AI RAG pipelines, and high-throughput data infrastructure supporting 10M+ daily active users. Expert in Python, C++, Apache Spark, Vector Databases, and cloud microservices.
+Lead AI Data Architect and Distributed Systems Specialist with 9+ years of experience designing real-time streaming architectures, PyTorch LLM & Custom SLM RAG pipelines, and high-throughput data infrastructure supporting 10M+ daily active users. Expert in Python, C++, Apache Spark, Vector Databases, and cloud microservices.
 
 EXPERIENCE:
 Lead AI Data Architect | Enterprise Intelligence Lab (2021 - Present)
